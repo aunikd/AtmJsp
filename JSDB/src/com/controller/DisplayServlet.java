@@ -1,5 +1,6 @@
 package com.controller;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -19,31 +20,11 @@ public class DisplayServlet extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("dsplayserv1");
-		DBApplication db=new DBApplication();
-		List<Register> lst=db.getAllData();
-		System.out.println("dsplayserv2");
-	/*	pw.print("<table>");
-		for(Register r:lst)
-		{
-	pw.print("<tr><td>"+r.getFname()+"</td><td>"+r.getRno()+"</td><tr>");
-		}
-		pw.println("</table>")
-		*/
-		
-		
-		
-		
-		/*HttpSession session=request.getSession(true);
-		session.setAttribute("data",lst);
-		response.sendRedirect("DisplayAll.jsp");
-	*/
-	
-request.setAttribute("empList",lst);
-RequestDispatcher view = request.getRequestDispatcher("list.jsp");
-view.forward(request, response);
-
-		
+		DBApplication db = new DBApplication();
+		List<Register> lst = db.getAllData();
+		request.setAttribute("display", lst);
+		RequestDispatcher  rd = request.getRequestDispatcher("DisplayAll.jsp");
+		rd.forward(request, response);	
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

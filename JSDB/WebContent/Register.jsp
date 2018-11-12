@@ -39,8 +39,18 @@
 <br><br>
 
 <input type="submit" value="Register" >
+<a href="Login.jsp">Already Registered? Login</a>
 
 </form>
 </div>
+<%!String str=null; %>
+	<%
+		if(!session.isNew())
+		{
+			str=(String)session.getAttribute("msg");
+			out.print(str);
+			session.invalidate();
+		}
+	%>
 </body>
 </html>

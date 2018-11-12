@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dao.DBApplication;
 import com.model.Register;
@@ -55,46 +56,49 @@ public class UserServlet extends HttpServlet {
 		{
 			if(chk==r.getRno()){
 				//SENDING VALUE TO USERPAGE JSP
-				request.setAttribute("myname",r.getFname());			
-				request.getRequestDispatcher("UserPage.jsp");
-				
-				
-				String myno= Integer.toString(r.getRno());
-				request.setAttribute("myno",myno);			
-				request.getRequestDispatcher("UserPage.jsp");
-				request.getRequestDispatcher("TransactionServlet");
-				
-				String mybal=Double.toString(r.getBal());
-				request.setAttribute("mybal",mybal);			
-				request.getRequestDispatcher("UserPage.jsp").forward(request, response);
-				
-				
-				request.setAttribute("val2", chk);
-				request.getRequestDispatcher("TransactionServlet").forward(request, response);
+				try {
+					request.setAttribute("myname",r.getFname());			
+					request.getRequestDispatcher("UserPage.jsp");
+					
+					
+					String myno= Integer.toString(r.getRno());
+					request.setAttribute("myno",myno);			
+					request.getRequestDispatcher("UserPage.jsp");
+					
+					
+					String mybal=Double.toString(r.getBal());
+					request.setAttribute("mybal",mybal);			
+					request.getRequestDispatcher("UserPage.jsp").forward(request, response);
+					
+					System.out.println("val2:"+chk);
+					HttpSession session1=request.getSession(true);
+					session1.setAttribute("val2",r.getRno());
+					
+					response.sendRedirect("TransactionServlet");
+
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				
 				
 				//CONSOLE PRINT
 				//pw.print("<tr><td>"+r.getFname()+"</td><td>"+r.getRno()+"</td><tr>"+r.getBal()+"</td><tr>");
-				request.setAttribute("val2", chk);
-				RequestDispatcher rd = request.getRequestDispatcher("TransactionServlet");
-				rd.forward(request,response);
+				
+				
 			}
 			}
-	;
+
 		
 		
 		
 		
 		
-		/*HttpSession session=request.getSession(true);
-		session.setAttribute("data",lst);
-		response.sendRedirect("DisplayAll.jsp");
-	*/
+		
 	
-request.setAttribute("empList",lst);
-RequestDispatcher view = request.getRequestDispatcher("list.jsp");
-view.forward(request, response);	}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

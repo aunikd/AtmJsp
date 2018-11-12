@@ -33,17 +33,19 @@
 			</tr>
 			
 			<tr>
-			<td><button onclick="myFunction()">Withdraw Money</button>
+			<td>Withdraw Money<input type="number" name="amount" placeholder="Enter Amount">
 			</td>
+			<input type="submit" value="withdraw">
 			</tr>
 		</table>
-		
-		<script>
+		<a href="Home.jsp">LOG-OUT</a>
+		<!-- <script>
 function myFunction() {
     var amount = prompt("Please enter amount", "XXXX");
+    return amount;
     
 }
-</script>
+</script> -->
 		
 		
 		

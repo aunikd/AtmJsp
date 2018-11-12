@@ -41,19 +41,34 @@ public class LoginServlet extends HttpServlet {
 		l.setRno(Integer.parseInt(s1));
 		l.setPass(s2);
 		DBApplication db=new DBApplication();
-		boolean b=db.validateUser(l);
-		if(b)
+		int b=db.validateUser(l);
+		System.out.println("b"+b);
+		if(b==2)
 		{
-			request.setAttribute("val1", s1);
-			RequestDispatcher rd = request.getRequestDispatcher("UserServlet");
-			rd.forward(request,response);
-
-			response.sendRedirect("UserPage.jsp");
+			response.sendRedirect("DisplayAll.jsp");
 		}
+		
+		else if(b==1)
+		{
+			try {
+				request.setAttribute("val1", s1);
+				RequestDispatcher rd = request.getRequestDispatcher("UserServlet");
+				
+				rd.forward(request, response);
+				response.sendRedirect("UserPage.jsp");
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		 
 		else
 		{
 			response.sendRedirect("Login.jsp");
 		}
+		
+		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

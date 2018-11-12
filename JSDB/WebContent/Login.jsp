@@ -22,11 +22,11 @@
 <form action="LoginServlet">
 <input type="text" name="rno" placeholder="Enter Registration Number">
 <br>
-<input type="text" name="pass" placeholder="Enter Password">
+<input type="password" name="pass" placeholder="Enter Password">
 <br>
 <input type="submit" value="Login">
 <a href="ForgotPass.jsp" class="btn btn-info">Forgot Password?</a><br>
-<>
+
 </form>
 </div>
 	<%!String str=null; %>

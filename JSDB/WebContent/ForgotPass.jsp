@@ -12,7 +12,7 @@
         <div class="form-group">
             <input type="text" class="form-control" name="rno" placeholder="Enter RNO" required="required">
         </div>
-        <%= request.getAttribute("mypass") %>
+        Your password is <%= request.getAttribute("mypass") %>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Send</button>
         </div>

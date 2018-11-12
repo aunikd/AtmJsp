@@ -131,7 +131,7 @@ public class DBApplication {
 	
 	public boolean withdraw(int a,int chk) {
 		
-		myConnection();
+		con=myConnection();
 		List<Register> lst=getAllData();
 		boolean b=false;
 		for(Register r:lst)
@@ -140,8 +140,19 @@ public class DBApplication {
 			{ 
 				
 				double new_bal=r.getBal()-a;
+				
 				r.setBal(new_bal);
-				b=true;
+				int nbal = (int)r.getBal();
+				try {
+					ps=con.prepareStatement("update Registration set bal=? where rno=?");
+					ps.setInt(1,nbal);
+					ps.setInt(2,r.getRno());
+					b=true;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}		
 		}
 		
@@ -149,22 +160,23 @@ public class DBApplication {
 		
 	}
 	
-	public boolean validateUser(Login l)
+	public int validateUser(Login l)
 	{
 		myConnection();
 		List<Register> lst=getAllData();
-		boolean b=false;
-		for(Register r:lst)
-		{
-			if(r.getRno()==l.getRno())
+		
+		for(Register r:lst)	{
+			if(r.getRno()==l.getRno() && l.getRno()==420)	{
+				return 2;
+			} 
+			else if(r.getRno()==l.getRno() && l.getRno()!=420)
 			{
-				if(r.getPass().equals(l.getPass()))
-				{
-					b=true;
-					break;
+				if(r.getPass().equals(l.getPass()))	{
+					return 1;
 				}
 			}
+		
 		}
-		return b;
+		return 0;
 	}
 }
