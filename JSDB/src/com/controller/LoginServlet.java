@@ -13,7 +13,7 @@ import com.dao.DBApplication;
 import com.model.Login;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LoginServlet to validate user based on login details/members
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("UserServlet");
 				
 				rd.forward(request, response);
-				response.sendRedirect("UserPage.jsp");
+
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

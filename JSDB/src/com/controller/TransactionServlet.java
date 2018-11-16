@@ -13,7 +13,7 @@ import com.dao.DBApplication;
 import com.model.Register;
 
 /**
- * Servlet implementation class TransactionServlet
+ * Servlet implementation class TransactionServlet to conduct withdrawal transaction
  */
 public class TransactionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,12 +36,16 @@ public class TransactionServlet extends HttpServlet {
 		int amnt=Integer.parseInt(s1);
 		
 		System.out.println(amnt);
-		HttpSession session1 = request.getSession();
-		int rn = (Integer)session1.getAttribute("val2");
 		
-		System.out.println("val2 t:"+rn);
+		
+		String chk1 = request.getParameter("mytno");
+		int chk=Integer.parseInt(chk1);
+		
+		
+		
+		System.out.println("val2 t:"+chk);
 
-		boolean flag=db.withdraw(amnt,rn);
+		boolean flag=db.withdraw(amnt,chk);
 		
 		
 		

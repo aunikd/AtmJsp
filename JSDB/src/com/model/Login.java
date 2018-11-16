@@ -1,7 +1,18 @@
 package com.model;
+
+/**Pojo class for Login instantiation
+ * 
+ * @author aunik
+ *
+ */
 public class Login {
 	private int rno;
 	private String pass;
+	
+	/**Setters and Getters for Login members
+	 * 
+	 * @return
+	 */
 	public int getRno() {
 		return rno;
 	}

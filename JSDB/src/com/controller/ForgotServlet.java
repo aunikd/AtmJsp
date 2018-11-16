@@ -12,7 +12,7 @@ import com.dao.DBApplication;
 import com.model.Register;
 
 /**
- * Servlet implementation class ForgotServlet
+ * Servlet implementation class ForgotServlet for retrieve password based on unique rno
  */
 public class ForgotServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

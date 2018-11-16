@@ -13,6 +13,11 @@ import javax.servlet.http.HttpSession;
 import com.dao.DBApplication;
 import com.model.Register;
 
+/** Servlet implementation class ForgotServlet to display all user data and send to DisplayAll jsp
+ * 
+ * @author aunik
+ *
+ */
 public class DisplayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      public DisplayServlet() {

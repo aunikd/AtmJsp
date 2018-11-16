@@ -17,7 +17,7 @@ import com.dao.DBApplication;
 import com.model.Register;
 
 /**
- * Servlet implementation class UserServlet
+ * Servlet implementation class UserServlet to display user's details
  */
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -54,6 +54,7 @@ public class UserServlet extends HttpServlet {
 		
 		for(Register r:lst)
 		{
+			System.out.println("r.get:"+r.getRno());
 			if(chk==r.getRno()){
 				//SENDING VALUE TO USERPAGE JSP
 				try {
@@ -70,11 +71,9 @@ public class UserServlet extends HttpServlet {
 					request.setAttribute("mybal",mybal);			
 					request.getRequestDispatcher("UserPage.jsp").forward(request, response);
 					
-					System.out.println("val2:"+chk);
-					HttpSession session1=request.getSession(true);
-					session1.setAttribute("val2",r.getRno());
 					
-					response.sendRedirect("TransactionServlet");
+					
+					//response.sendRedirect("TransactionServlet");
 
 					
 				} catch (Exception e) {

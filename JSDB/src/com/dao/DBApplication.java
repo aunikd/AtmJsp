@@ -9,13 +9,24 @@ import java.sql.Statement;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import com.model.Login;
 import com.model.Register;
+
+/** dao package class for JDBC connectivity setup
+ * 
+ * @author aunik
+ *
+ */
+
 public class DBApplication {
 	Connection con;
 	PreparedStatement ps;
 	ResultSet rs;
+	
+	/** Method for connection establishment 
+	 * 
+	 * @return Returns connection instance once excuted from try/catch block
+	 */
 	public Connection myConnection()
 	{
 		try
@@ -30,7 +41,11 @@ public class DBApplication {
 		return con;
 	}
 	
-	//SAVE DATA--------------------
+	/** Method to insert extracted values into database tabe 
+	 * 
+	 * @param lst Register List passed as parameter
+	 * @return Returns integer value as number of 
+	 */
 	public int saveData(List<Register> lst)
 	{
 		System.out.println("dbsave1");
@@ -41,16 +56,15 @@ public class DBApplication {
 		try
 		{
 			Iterator<Register> itr=lst.iterator();
-			System.out.println("dbsave2");
 			while(itr.hasNext())
 			{
-				System.out.println("dbsave3");
 				a=itr.next();
-				ps=con.prepareStatement("insert into Registration values(?,?,?,?)");
+				ps=con.prepareStatement("insert into Registration values(?,?,?,?,?)");
 				ps.setInt(1,a.getRno());
 				ps.setString(2,a.getFname());
 				ps.setString(3,a.getPass());
 				ps.setDouble(4,a.getBal());
+				ps.setString(5, a.getAcctype());
 				i = ps.executeUpdate();
 			}
 		}
@@ -72,7 +86,10 @@ public class DBApplication {
 		return i;
 	}
 	
-	//GET ALL DATA-------------
+	/** Method to extract all rows/tuples from Registration table
+	 * 
+	 * @return Returns Register List of all extracted tuples
+	 */
 	public List<Register> getAllData()
 	{
 		List<Register> lst=new LinkedList<Register>();
@@ -91,8 +108,8 @@ public class DBApplication {
 				a.setFname(rs.getString(2));
 				a.setPass(rs.getString(3));
 				a.setBal(rs.getDouble(4));
+				a.setAcctype(rs.getString(5));
 				lst.add(a);
-				System.out.println("cnt");
 			}
 		}
 		catch(Exception e)
@@ -102,6 +119,12 @@ public class DBApplication {
 		return lst;
 	}
 	
+	
+	/** Method to extract one row/tuple from Registration table based on Login parameters passed
+	 * 
+	 * @param l Login oject passed for db extraction
+	 * @return Returns Register List of extracted tuple
+	 */
 	public List<Register> getData(Login l)
 	{
 		List<Register> lst=new LinkedList<>();
@@ -129,6 +152,13 @@ public class DBApplication {
 		return lst;
 	}
 	
+	
+	/** Withdraw method for deducting specific amount parameter passed for User balance from db
+	 * 
+	 * @param a Amount to be deducted from balance
+	 * @param chk Unique Rno from which balance has to be deducted
+	 * @return Returns boolean value indicating successfull or unsuccessfull withdrawal
+	 */
 	public boolean withdraw(int a,int chk) {
 		
 		con=myConnection();
@@ -144,7 +174,7 @@ public class DBApplication {
 				r.setBal(new_bal);
 				int nbal = (int)r.getBal();
 				try {
-					ps=con.prepareStatement("update Registration set bal=? where rno=?");
+					ps=con.prepareStatement("update table Registration set bal=? where rno=?");
 					ps.setInt(1,nbal);
 					ps.setInt(2,r.getRno());
 					b=true;
@@ -160,6 +190,11 @@ public class DBApplication {
 		
 	}
 	
+	/** Method to Validate user based on existence in Registration table in db
+	 * 
+	 * @param l Login object passed as parameter
+	 * @return Return int value 0,1 and 2 indicating invalid,admin login and regular user validation
+	 */
 	public int validateUser(Login l)
 	{
 		myConnection();

@@ -1,7 +1,7 @@
 package com.model;
 
-/**
- * @author Rahul
+/**	Pojo class for Register instantiation
+ * @author aunik
  *
  */
 public class Register {
@@ -9,6 +9,19 @@ public class Register {
 	private String fname;
 	private String pass;
 	private double bal;
+	private String acctype;
+
+	/**Setters and getters for Register members
+	 * 
+	 * @return 
+	 */
+	
+	public String getAcctype() {
+		return acctype;
+	}
+	public void setAcctype(String acctype) {
+		this.acctype = acctype;
+	}	
 	public int getRno() {
 		return rno;
 	}

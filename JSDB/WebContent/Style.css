@@ -1,17 +1,28 @@
-#main {
-	background-color: #fdffd2;
-	vertical-align: 50%;
-	width: 100%;
-	vertical-align: 50%;
-}
-
-input {
-	width: 20%;
-	padding: 10px;
-	border-width: 2px;
-	border-radius: 50px;
-}
-
+@charset "ISO-8859-1";
 body {
-	background-color: #e3fafb;
+    /* The image used */
+    background-image: url("image.jpg");
+
+    /* Full height */
+    /*height: 100%; */
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+th,td{
+				padding: 15px;
+				text-align: center;
+}
+ul {     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width : 300px; }
+li a {    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; }
+li a:hover {    background-color: #111; }
